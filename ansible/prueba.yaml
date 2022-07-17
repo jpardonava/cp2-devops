@@ -1,6 +1,0 @@
----
-
-- name: Configuracion exclusiva del master
-  hosts: master
-  roles:
-    - master
