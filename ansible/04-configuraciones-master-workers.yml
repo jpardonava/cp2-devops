@@ -1,0 +1,13 @@
+---
+
+- name: Configuracion exclusiva del master
+  hosts: master
+  roles:
+    - master
+
+- name: Configuracion exclusiva de los workers
+  hosts: workers
+  gather_facts: true
+  roles:
+    - workers
+
