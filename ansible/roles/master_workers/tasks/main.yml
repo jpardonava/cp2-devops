@@ -74,7 +74,7 @@
   notify: reload_firewalld 
   become: yes
   
-- name: Habilitamos puertos usados por la SDN Flannel para Azure 8285 UDP
+- name: Habilitamos puertos usados por la SDN para Azure 8285 UDP
   firewalld:
     port: 8285/udp
     permanent: true
@@ -82,7 +82,7 @@
   notify: reload_firewalld
   become: yes
   
-- name: Habilitamos puertos usados por la SDN Flannel para Azure 8472 UDP
+- name: Habilitamos puertos usados por la SDN para Azure 8472 UDP
   firewalld:
     port: 8472/udp
     permanent: true

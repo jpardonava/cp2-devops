@@ -1,9 +1,5 @@
   
 - debug:
-    msg: "La IP del master es: {{ ip_master }}"
-  when: ip_master is defined
-
-- debug:
         msg: "Comando para el alta de los workers: {{ comando_join_worker }}"
   when: comando_join_worker is defined  
 
