@@ -15,22 +15,21 @@
   register: kubeadm_check_namespace
   become: false
 
-- name: Salida de la comprobacion del amespace (2)
+- name: Salida de la comprobacion del namespace (2)
   debug:
     msg: "{{ kubeadm_check_namespace.stdout }}"
 
-
-## Copiando los archivos de despliegue de las aplicaciones al master ##
-- name: Copiando archivo de la aplicacion al master (3)
-  copy:
-    src: "myapp.yaml"
-    dest: "/home/azureuser/myapp.yaml"
+## Copiando archivo despliegue aplicacion al master ##
+- name: Copiando template aplicacion
+  template:
+    src: myapp.j2
+    dest: /home/azureuser/aplicacion.yaml
     owner: azureuser
     group: users
     mode: '0644'
 
 - name:  Crear recursos de la aplicación (3)
-  shell: "export KUBECONFIG=/home/azureuser/.kube/config;kubectl apply -f /home/azureuser/myapp.yaml"
+  shell: "export KUBECONFIG=/home/azureuser/.kube/config;kubectl apply -f /home/azureuser/aplicacion.yaml"
   register: kubeadm_recursos_namespace
   become: false
 
@@ -38,12 +37,12 @@
   debug:
     msg: "{{ kubeadm_recursos_namespace.stdout }}"
 
-- name: Esperamos 1 minuto1 para crear recursos de la aplicacion
+- name: Esperamos 1 minuto para crear recursos de la aplicacion
   pause:
     minutes: 1
 
 - name:  Consultar los recursos deployment,pods,services (4)
-  shell: "export KUBECONFIG=/home/azureuser/.kube/config;kubectl get deployment,pods,services -n example"
+  shell: "export KUBECONFIG=/home/azureuser/.kube/config;kubectl get deployment,pods,pv,pvc -n example"
   register: kubeadm_recursos_namespace
 
 - name: Salida de la consulta de recursos (4)

@@ -1,4 +1,4 @@
 ---
 
 labdomain: 'example.com'
-dnf_packages_common: ['chrony','firewalld']
+dnf_packages_common: ['chrony','firewalld','nfs-utils']
